@@ -1,4 +1,5 @@
 use clap::Parser;
+use notify_rust::Notification;
 use std::process;
 use std::time::Duration;
 use std::{io, thread};
@@ -11,7 +12,12 @@ struct Args {
     break_time: i32,
 }
 
-fn countdown(min: i32) {
+enum SessionType {
+    BREAK,
+    SESSION,
+}
+
+fn countdown(min: i32, sesssion_type: SessionType) {
     let mut sec = min * 60;
 
     while sec != 0 {
@@ -22,6 +28,24 @@ fn countdown(min: i32) {
         println!("{}", display_time);
         thread::sleep(Duration::from_secs(1));
         sec -= 1;
+    }
+    print!("\x1B[2J\x1B[1;1H"); // used to clear the terminal screen
+    println!("00:00");
+    match sesssion_type {
+        SessionType::BREAK => {
+            Notification::new()
+                .summary("Break ended")
+                .body("Your break has ended get back to work")
+                .show()
+                .unwrap();
+        }
+        SessionType::SESSION => {
+            Notification::new()
+                .summary("Session ended")
+                .body("Your session has ended, take a break")
+                .show()
+                .unwrap();
+        }
     }
 }
 
@@ -39,7 +63,7 @@ fn pomodoro(session_time: i32, break_time: i32) {
 
             match session_check.as_str() {
                 "y" | "yes" => {
-                    countdown(session_time);
+                    countdown(session_time, SessionType::SESSION);
                     session_counter += 1;
                     break;
                 }
@@ -66,7 +90,7 @@ fn pomodoro(session_time: i32, break_time: i32) {
 
             match break_check.as_str() {
                 "y" | "yes" => {
-                    countdown(break_time);
+                    countdown(break_time, SessionType::BREAK);
                     break;
                 }
 
