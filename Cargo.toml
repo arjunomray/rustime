@@ -8,6 +8,7 @@ readme = "README.md"
 repository = "https://githuh.com/arjunomray/rustime"
 keywords = ["cli", "pomodoro", "productivity"]
 categories = ["command-line-utilities"]
+license = "MIT"
 
 [dependencies]
 clap = { version = "4.5.6", features = ["derive"] }
