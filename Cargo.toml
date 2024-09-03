@@ -2,6 +2,12 @@
 name = "rustime"
 version = "0.1.0"
 edition = "2021"
+author = ["arjunomray <arjunomray@gmail.com>"]
+description = "A pomodoro time in rust"
+readme = "README.md"
+repository = "https://githuh.com/arjunomray/rustime"
+keywords = ["cli", "pomodoro", "productivity"]
+categories = ["command-line-utilities"]
 
 [dependencies]
 clap = { version = "4.5.6", features = ["derive"] }
