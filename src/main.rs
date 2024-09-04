@@ -4,5 +4,5 @@ use rustime::Args;
 
 fn main() {
     let args = Args::parse();
-    pomodoro(args.session_time, args.break_time);
+    pomodoro(args.session_time, args.break_time, &args.session_title);
 }
