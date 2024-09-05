@@ -1,6 +1,6 @@
 [package]
 name = "rustime"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 author = ["arjunomray <arjunomray@gmail.com>"]
 description = "A pomodoro time in rust"
