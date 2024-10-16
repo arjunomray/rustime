@@ -1,6 +1,20 @@
 # Rustime
 
-It is just a simple to use cli based pomodoro timer.
+A simple to use cli based pomodoro timer.
+
+## Installation
+
+1. Install rust
+
+  ```sh
+  curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+  ```
+
+2. Use cargo to install
+
+  ```sh
+  cargo install rustime
+  ```
 
 ## Usage commands
 
