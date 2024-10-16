@@ -1,11 +1,11 @@
 [package]
 name = "rustime"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 author = ["arjunomray <arjunomray@gmail.com>"]
 description = "A pomodoro time in rust"
 readme = "README.md"
-repository = "https://githuh.com/arjunomray/rustime"
+repository = "https://github.com/arjunomray/rustime"
 keywords = ["cli", "pomodoro", "productivity"]
 categories = ["command-line-utilities"]
 license = "MIT"
