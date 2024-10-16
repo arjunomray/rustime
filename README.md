@@ -1,12 +1,10 @@
-#+TITLE: README
-
-
-* Rustime
+# Rustime
 
 It is just a simple to use cli based pomodoro timer.
 
-** Usage commands:
-#+BEGIN_SRC  shell
+## Usage commands
+
+```sh
 ->rustime -h
 Usage: rustime [OPTIONS]
 
@@ -15,4 +13,8 @@ Options:
   -b, --break-time <BREAK_TIME>        [default: 5]
   -n, --session-title <SESSION_TITLE>  [default: "Working on Stuff"]
   -h, --help                           Print help
-#+END_SRC
+```
+
+## Contributions
+
+Thanks to  Felix Lee <flee@cse.psu.edu> for the ascii art.
