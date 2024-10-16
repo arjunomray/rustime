@@ -12,9 +12,6 @@ Options:
   -s, --session-time <SESSION_TIME>    [default: 25]
   -b, --break-time <BREAK_TIME>        [default: 5]
   -n, --session-title <SESSION_TITLE>  [default: "Working on Stuff"]
+  -m, --minimal-version
   -h, --help                           Print help
 ```
-
-## Contributions
-
-Thanks to  Felix Lee <flee@cse.psu.edu> for the ascii art.
