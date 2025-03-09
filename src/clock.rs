@@ -1,9 +1,10 @@
 use crate::ascii_art::render_art;
+// use crate::db;
 use crate::num_to_ascii::get_ascii;
 use notify_rust::Notification;
-use std::process;
+// use std::process;
+use std::thread;
 use std::time::Duration;
-use std::{io, thread};
 
 pub enum SessionType {
     BREAK,
@@ -37,7 +38,7 @@ fn render_clock(disp_min: i32, disp_sec: i32) {
     }
 }
 
-fn countdown(
+pub fn countdown(
     min: i32,
     session_type: SessionType,
     session_title: &String,
@@ -67,89 +68,113 @@ fn countdown(
     render_clock(00, 00);
     match session_type {
         SessionType::BREAK => {
-            Notification::new()
+            let notification = Notification::new()
                 .summary("Break ended")
                 .body("Your break has ended get back to work")
-                .show()
-                .unwrap();
+                .show();
+            match notification {
+                Ok(_) => {
+                    println!("Send a notification");
+                }
+                Err(e) => {
+                    eprintln!("Failed to send a notification: {e}");
+                }
+            }
         }
         SessionType::SESSION => {
-            Notification::new()
+            let notification = Notification::new()
                 .summary("Session ended")
                 .body("Your session has ended, take a break")
-                .show()
-                .unwrap();
-        }
-    }
-}
+                .show();
 
-pub fn pomodoro(session_time: i32, break_time: i32, session_name: &String, minimal_version: &bool) {
-    let mut session_counter = 0;
-    loop {
-        loop {
-            println!("Start session? (Y/n)");
-            let mut session_check = String::new();
-            io::stdin()
-                .read_line(&mut session_check)
-                .expect("Failed to read");
-
-            let session_check = session_check.trim().to_lowercase();
-
-            match session_check.as_str() {
-                "y" | "yes" => {
-                    countdown(
-                        session_time,
-                        SessionType::SESSION,
-                        session_name,
-                        session_counter,
-                        minimal_version,
-                    );
-                    session_counter += 1;
-                    break;
+            match notification {
+                Ok(_) => {
+                    println!("Send a notification");
                 }
-
-                "n" | "no" => {
-                    println!("Exiting program... worked for {session_counter} sessions");
-                    process::exit(0)
-                }
-                _ => {
-                    println!("Invalid input.");
-                    continue;
-                }
-            }
-        }
-
-        loop {
-            println!("Start break? (Y/n)");
-            let mut break_check = String::new();
-            io::stdin()
-                .read_line(&mut break_check)
-                .expect("Failed to read");
-
-            let break_check = break_check.trim().to_lowercase();
-
-            match break_check.as_str() {
-                "y" | "yes" => {
-                    countdown(
-                        break_time,
-                        SessionType::BREAK,
-                        session_name,
-                        session_counter,
-                        minimal_version,
-                    );
-                    break;
-                }
-
-                "n" | "no" => {
-                    println!("Exiting program... worked for {session_counter} sessions");
-                    process::exit(0)
-                }
-                _ => {
-                    println!("Invalid input.");
-
-                    continue;
+                Err(e) => {
+                    eprintln!("Failed to send a notification: {e}");
                 }
             }
         }
     }
 }
+
+// pub fn pomodoro(
+//     session_time: i32,
+//     break_time: i32,
+//     session_name: &String,
+//     minimal_version: &bool,
+//     session_id: i64,
+// ) {
+//     let mut session_counter = 0;
+//     loop {
+//         loop {
+//             println!("Start session? (Y/n)");
+//             let mut session_check = String::new();
+//             io::stdin()
+//                 .read_line(&mut session_check)
+//                 .expect("Failed to read");
+
+//             let session_check = session_check.trim().to_lowercase();
+
+//             match session_check.as_str() {
+//                 "y" | "yes" => {
+//                     countdown(
+//                         session_time,
+//                         SessionType::SESSION,
+//                         session_name,
+//                         session_counter,
+//                         minimal_version,
+//                     );
+//                     session_counter += 1;
+//                     if let Err(e) = db::increment_session_count(session_id) {
+//                         eprintln!("Failed to update session count: {}", e);
+//                     }
+//                     break;
+//                 }
+
+//                 "n" | "no" => {
+//                     println!("Exiting program... worked for {session_counter} sessions");
+//                     process::exit(0)
+//                 }
+//                 _ => {
+//                     println!("Invalid input.");
+//                     continue;
+//                 }
+//             }
+//         }
+
+//         loop {
+//             println!("Start break? (Y/n)");
+//             let mut break_check = String::new();
+//             io::stdin()
+//                 .read_line(&mut break_check)
+//                 .expect("Failed to read");
+
+//             let break_check = break_check.trim().to_lowercase();
+
+//             match break_check.as_str() {
+//                 "y" | "yes" => {
+//                     countdown(
+//                         break_time,
+//                         SessionType::BREAK,
+//                         session_name,
+//                         session_counter,
+//                         minimal_version,
+//                     );
+//                     break;
+//                 }
+
+//                 "n" | "no" => {
+//                     println!("Exiting program... worked for {session_counter} sessions");
+//                     process::exit(0)
+//                 }
+//                 _ => {
+//                     println!("Invalid input.");
+
+//                     continue;
+//                 }
+//             }
+//         }
+//     }
+// }

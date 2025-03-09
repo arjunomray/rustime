@@ -1,8 +1,8 @@
 [package]
 name = "rustime"
-version = "0.1.3"
+version = "0.1.4"
 edition = "2021"
-author = ["arjunomray <arjunomray@gmail.com>"]
+authors =["arjunomray <arjunomray@gmail.com>"] 
 description = "A pomodoro time in rust"
 readme = "README.md"
 repository = "https://github.com/arjunomray/rustime"
@@ -12,4 +12,6 @@ license = "MIT"
 
 [dependencies]
 clap = { version = "4.5.6", features = ["derive"] }
+dirs = "6.0.0"
 notify-rust = "4.6.0"
+rusqlite = "0.34.0"
