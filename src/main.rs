@@ -1,18 +1,16 @@
-use crate::cli::Args;
+use crate::{config::cli::Args, db::db::Database};
 use clap::Parser;
 
-mod ascii_art;
-mod cli;
-mod clock;
+mod config;
 mod db;
-mod num_to_ascii;
-mod session_manager;
+mod services;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let db = Database::new()?;
     let args = Args::parse();
 
-    let session_info = session_manager::handle_sessions(&args)?;
-    session_manager::run_session(
+    let session_info = db.handle_sessions(&args)?;
+    db.run_session(
         session_info,
         args.session_time,
         args.break_time,

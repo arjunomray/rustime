@@ -1,4 +1,4 @@
-use crate::clock::SessionType;
+use crate::services::clock::SessionType;
 
 pub fn render_art(session_type: &SessionType) {
     match session_type {

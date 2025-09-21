@@ -31,3 +31,6 @@ Options:
   -n, --new-session <NEW_SESSION>
   -h, --help                           Print help
 ```
+## Things to work on
+- [ ] move the infra to a bit more structured framework (ratatui or something)
+- [ ] add discord presence to this
