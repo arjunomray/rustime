@@ -9,15 +9,16 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let db = Database::new()?;
     let args = Args::parse();
     let session_info = db.handle_sessions(&args)?;
-    let mut client = DiscordPresence::new(
+
+    // Try to initialize Discord presence, but don't panic if it fails
+    let mut discord_presence = DiscordPresence::new(
         "1419366249745350666".to_string(),
         session_info.name.as_str(),
         "Getting ready to work",
     );
-    match client.update_activity() {
-        Ok(_) => {}
-        Err(e) => eprintln!("Failed to update Discord activity: {}", e),
-    }
+
+    // Try to update activity - the function now handles errors internally
+    let _ = discord_presence.update_activity();
 
     db.run_session(
         session_info,
